@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, Image, TouchableOpacity, Linking, StyleSheet, FlatList, TextInput } from 'react-native';
 import Header from '../components/Header';
 import livros from '../data/livros.json';
+import Feather from 'react-native-vector-icons/Feather';
 
 const HomeScreen = ({ navigation }) => {
   const [dadosLivros, setDadosLivros] = useState([]);
@@ -27,7 +28,7 @@ const HomeScreen = ({ navigation }) => {
       <Image source={{ uri: item.imagem }} style={styles.itemImage} />
       <View style={styles.itemContent}>
         <Text style={styles.itemTitle}>{item.titulo}</Text>
-        <Text style={styles.itemText}>Trocador: {item.nome_pessoa}</Text>
+        <Text style={styles.itemText}>{item.nome_pessoa}</Text>
         <Text style={styles.itemText}>Gênero: {item.genero}</Text>
         <Text style={styles.itemText}>Data de Publicação: {item.data}</Text>
         <TouchableOpacity
@@ -35,6 +36,7 @@ const HomeScreen = ({ navigation }) => {
           style={styles.button}
         >
           <Text style={styles.buttonText}>Enviar Mensagem</Text>
+          <Feather name="message-circle" size={20} color="#00E500" style={styles.icon} />
         </TouchableOpacity>
       </View>
     </View>
@@ -112,6 +114,7 @@ const styles = StyleSheet.create({
   itemTitle: {
     fontWeight: 'bold',
     fontSize: 16,
+    paddingBottom: 5,
   },
   itemText: {
     marginBottom: 5,
@@ -119,8 +122,12 @@ const styles = StyleSheet.create({
   button: {
     marginTop: 10,
     padding: 10,
-    backgroundColor: '#25d366',
+    paddingLeft: 30,
+    paddingRight: 30,
+    backgroundColor: '#c56648',
     borderRadius: 5,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   buttonText: {
     color: '#fff',

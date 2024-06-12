@@ -1,6 +1,6 @@
 // HomeScreen2.js
 import React from 'react';
-import { View, Text, StyleSheet, Image, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, Image, ScrollView, FlatList } from 'react-native';
 import userInfo from '../userInfo'; // Importe o objeto userInfo do arquivo userInfo.js
 import reviewInfo from '../reviewInfo';
 import Header from '../components/Header';
@@ -12,22 +12,24 @@ const HomeScreen2 = ({ navigation }) => {
       <Header navigation={navigation}/>
       <View style={styles.cards}>
         <Image source={require('../assets/profile_image.png.jpg')} style={styles.profileImage} />
-        <Text style={styles.title}>Perfil do Usuário</Text>
+        <Text style={styles.title}>{userInfo.name}</Text>
         <View style={styles.userInfo}>
-          <Text style={styles.userInfoText}>Nome: {userInfo.name}</Text>
           <Text style={styles.userInfoText}>Email: {userInfo.email}</Text>
           <Text style={styles.userInfoText}>Idade: {userInfo.age}</Text>
           <Text style={styles.userInfoText}>Cidade: {userInfo.city}</Text>
           <Text style={styles.userInfoText}>País: {userInfo.country}</Text>
           <Text style={styles.userInfoText}>Gênero Favorito: {userInfo.favoriteGenre}</Text>
         </View>
-        <View style={styles.reviewInfo}>
-          <Text style={styles.reviewInfoText}>{reviewInfo.nome}</Text>
-          <Text style={styles.reviewInfoText}>Nota: {reviewInfo.nota_da_troca}</Text>
-          <Text style={styles.reviewInfoText}>{reviewInfo.comentario}</Text>
+        <Text style={styles.subtitle}>Avaliações</Text>
+      {reviewInfo.map((review) => (
+        <View key={review.nome} style={styles.reviewInfo}>
+          <Text style={styles.reviewInfoText}>{review.nome}</Text>
+          <Text style={styles.reviewInfoText}>Nota: {review.nota_da_troca}</Text>
+          <Text style={styles.reviewInfoText}>{review.comentario}</Text>
         </View>
+      ))}
+    </View>
         </View>
-      </View>
     </ScrollView>
   );
 };
@@ -49,7 +51,10 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 20,
-    color: '#fff',
+  },
+  subtitle: {
+    fontSize: 20,
+    marginBottom: 20,
   },
   profileImage: {
     paddingTop: 25,

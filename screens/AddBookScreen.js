@@ -127,7 +127,8 @@ const styles = StyleSheet.create({
   },
   button: {
     padding: 10,
-    backgroundColor: '#25d366',
+    marginBottom: 20,
+    backgroundColor: '#c56648',
     borderRadius: 5,
     alignItems: 'center',
   },
@@ -138,7 +139,7 @@ const styles = StyleSheet.create({
   submitButton: {
     marginTop: 20,
     padding: 10,
-    backgroundColor: '#1E90FF',
+    backgroundColor: '#25d366',
     borderRadius: 5,
     alignItems: 'center',
   },

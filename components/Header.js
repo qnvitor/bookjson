@@ -1,8 +1,10 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, Image, StyleSheet } from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
+import { Platform } from 'react-native';
 
-const Header = ({ navigation, onSearchPress, onProfilePress }) => {
+const Header = ({ navigation, onSearchPress }) => {
+
   return (
     <View style={styles.header}>
       <TouchableOpacity onPress={() => navigation.navigate('Home')}>
@@ -30,7 +32,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    padding: 10,
+    paddingBottom: 15,
   },
   logo: {
     width: 40,
@@ -43,6 +45,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   iconContainer: {
+    marginTop: 12,
     flexDirection: 'row',
   },
   icon: {
