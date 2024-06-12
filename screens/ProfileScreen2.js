@@ -9,44 +9,41 @@ const ProfileScreen2 = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Carregar as informações do usuário
-    FileSystem.readAsStringAsync(`${FileSystem.documentDirectory}reviewInfo.js`)
-      .then(data => {
+    const fetchData = async () => {
+      try {
+        const data = await FileSystem.readAsStringAsync(`${FileSystem.documentDirectory}reviewinfo.json`);
         setReviewInfo(JSON.parse(data));
+      } catch (err) {
+        setError(err);
+      } finally {
         setLoading(false);
-      })
-      .catch(error => {
-        setError(error);
-        setLoading(false);
-      });
+      }
+    };
+
+    fetchData();
   }, []);
-
-  if (loading) {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.loadingText}>Carregando informações da review...</Text>
-      </View>
-    );
-  }
-
-  if (error) {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.errorText}>Erro ao carregar informações da review: {error.message}</Text>
-      </View>
-    );
-  }
 
   return (
     <View style={styles.container}>
-      <Text style={styles.titleReview}>Avaliações</Text>
-      {reviewInfo ? (
+      {loading && (
+        <Text style={styles.loadingText}>Carregando informações da review...</Text>
+      )}
+
+      {error && (
+        <View style={styles.container}>
+          <Text style={styles.errorText}>Erro ao carregar informações da review: {error.message}</Text>
+        </View>
+      )}
+
+      {reviewInfo && (
         <View style={styles.reviewInfo}>
           <Text style={styles.reviewInfoText}>{reviewInfo.nome}</Text>
           <Text style={styles.reviewInfoText}>Nota: {reviewInfo.nota_da_troca}</Text>
           <Text style={styles.reviewInfoText}>{reviewInfo.comentario}</Text>
         </View>
-      ) : (
+      )}
+
+      {!loading && !error && !reviewInfo && (
         <Text style={styles.noDataText}>Nenhuma informação de review encontrada.</Text>
       )}
     </View>
